@@ -1,37 +1,30 @@
 /*
-  Leaflet.AwesomeMarkers, a plugin that adds colorful iconic markers for Leaflet, based on the Font Awesome icons
-  (c) 2012-2013, Lennard Voogdt
-
-  http://leafletjs.com
-  https://github.com/lvoogdt
+    Leaflet.KNreiseMarkers, svg-based markers for leaflet
+    Based on Leaflet.AwesomeMarkers
 */
 
 /*global L*/
 
-(function (window, document, undefined) {
-    "use strict";
+(function () {
+    'use strict';
     /*
-     * Leaflet.AwesomeMarkers assumes that you have already included the Leaflet library.
+     * Leaflet.KNreiseMarkers assumes that you have already included the Leaflet library.
      */
 
-    L.AwesomeMarkers = {};
+    L.KNreiseMarkers = {};
 
-    L.AwesomeMarkers.version = '2.0.1';
+    var pin = "m 17.55,4.1951017 c -9.6366105,0 -17.4496113,7.4402593 -17.4496113,16.6171183 0,5.366984 4.6259821,10.878443 7.9062546,15.588509 C 13.057202,43.652706 17.55,49.004896 17.55,49.004896 c 0,0 4.461376,-5.052713 9.506171,-12.22664 3.296987,-4.688464 7.94344,-10.282935 7.94344,-15.965121 0,-9.177774 -7.813,-16.6180333 -17.449611,-16.6180333 z";
 
-    L.AwesomeMarkers.Icon = L.Icon.extend({
+    L.KNreiseMarkers.Icon = L.Icon.extend({
         options: {
             iconSize: [35, 45],
-            iconAnchor:   [17, 42],
+            iconAnchor:  [17, 42],
             popupAnchor: [1, -32],
             shadowAnchor: [10, 12],
             shadowSize: [36, 16],
             className: 'awesome-marker',
-            prefix: 'glyphicon',
-            spinClass: 'fa-spin',
             extraClasses: '',
-            icon: 'home',
-            markerColor: 'blue',
-            iconColor: 'white'
+            markerColor: '#ff0000'
         },
 
         initialize: function (options) {
@@ -40,43 +33,14 @@
 
         createIcon: function () {
             var div = document.createElement('div'),
-                options = this.options;
+                options = this.options,
+                icon = null;
 
-            if (options.icon) {
-                div.innerHTML = this._createInner();
-            }
+            div.innerHTML = '<svg width="49px" height="49px" viewBox="0 0 49 49" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g transform="translate(0,-4)">' + '<path d="' + pin + '" fill="' + options.markerColor + '"></path></g>' + icon + '</svg>';
 
-            if (options.bgPos) {
-                div.style.backgroundPosition =
-                    (-options.bgPos.x) + 'px ' + (-options.bgPos.y) + 'px';
-            }
-
+            this._setIconStyles(div, 'icon');
             this._setIconStyles(div, 'icon-' + options.markerColor);
             return div;
-        },
-
-        _createInner: function() {
-            var iconClass, iconSpinClass = "", iconColorClass = "", iconColorStyle = "", options = this.options;
-
-            if(options.icon.slice(0,options.prefix.length+1) === options.prefix + "-") {
-                iconClass = options.icon;
-            } else {
-                iconClass = options.prefix + "-" + options.icon;
-            }
-
-            if(options.spin && typeof options.spinClass === "string") {
-                iconSpinClass = options.spinClass;
-            }
-
-            if(options.iconColor) {
-                if(options.iconColor === 'white' || options.iconColor === 'black') {
-                    iconColorClass = "icon-" + options.iconColor;
-                } else {
-                    iconColorStyle = "style='color: " + options.iconColor + "' ";
-                }
-            }
-
-            return "<i " + iconColorStyle + "class='" + options.extraClasses + " " + options.prefix + " " + iconClass + " " + iconSpinClass + " " + iconColorClass + "'></i>";
         },
 
         _setIconStyles: function (img, name) {
@@ -112,14 +76,14 @@
 
             this._setIconStyles(div, 'shadow');
             return div;
-      }
+        }
     });
-        
-    L.AwesomeMarkers.icon = function (options) {
-        return new L.AwesomeMarkers.Icon(options);
+
+    L.KNreiseMarkers.icon = function (options) {
+        return new L.KNreiseMarkers.Icon(options);
     };
 
-}(this, document));
+}());
 
 
 
