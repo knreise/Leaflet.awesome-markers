@@ -20,7 +20,7 @@
   <div id="map" style="width: 800px; height: 600px"></div>
 
   <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
-  <script src="../dist/leaflet.awesome-markers.js"></script>
+  <script src="../dist/leaflet.knreise-markers.min.js"></script>
   <script>
     var map = L.map('map').fitWorld();
 
@@ -47,11 +47,10 @@
 
     var markers = Array.apply(null, {length: 50}).map(Function.call, function (index) {
         var color = getRandomColor();
-        var awesomeIcon = awesomeIcons[Math.floor(Math.random()*awesomeIcons.length)];
         var lat = getRandomInRange(-90, 90, 5);
         var lng = getRandomInRange(-180, 180, 5);
 
-        L.marker([lat, lng], {icon: L.KNreiseMarkers.icon({icon: awesomeIcon, prefix: 'fa', markerColor: color}) }).addTo(map);
+        L.marker([lat, lng], {icon: L.KNreiseMarkers.icon({markerColor: color}) }).addTo(map);
     });
   </script>
 </body>
