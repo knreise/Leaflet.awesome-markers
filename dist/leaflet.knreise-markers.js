@@ -7,15 +7,16 @@
 
 (function () {
     'use strict';
+
     /*
      * Leaflet.KNreiseMarkers assumes that you have already included the Leaflet library.
      */
-
     L.KNreiseMarkers = {};
 
-    var pin = "m 17.55,4.1951017 c -9.6366105,0 -17.4496113,7.4402593 -17.4496113,16.6171183 0,5.366984 4.6259821,10.878443 7.9062546,15.588509 C 13.057202,43.652706 17.55,49.004896 17.55,49.004896 c 0,0 4.461376,-5.052713 9.506171,-12.22664 3.296987,-4.688464 7.94344,-10.282935 7.94344,-15.965121 0,-9.177774 -7.813,-16.6180333 -17.449611,-16.6180333 z";
+    var pin = 'm 17.55,4.1951017 c -9.6366105,0 -17.4496113,7.4402593 -17.4496113,16.6171183 0,5.366984 4.6259821,10.878443 7.9062546,15.588509 C 13.057202,43.652706 17.55,49.004896 17.55,49.004896 c 0,0 4.461376,-5.052713 9.506171,-12.22664 3.296987,-4.688464 7.94344,-10.282935 7.94344,-15.965121 0,-9.177774 -7.813,-16.6180333 -17.449611,-16.6180333 z';
 
     L.KNreiseMarkers.Icon = L.Icon.extend({
+
         options: {
             iconSize: [35, 45],
             iconAnchor:  [17, 42],
@@ -29,15 +30,14 @@
 
         initialize: function (options) {
             options = L.Util.setOptions(this, options);
+            return options;
         },
 
-        createIcon: function () {
-            var div = document.createElement('div'),
-                options = this.options,
-                icon = null;
-
-            div.innerHTML = '<svg width="49px" height="49px" viewBox="0 0 49 49" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g transform="translate(0,-4)">' + '<path d="' + pin + '" fill="' + options.markerColor + '"></path></g>' + icon + '</svg>';
-
+        createIcon: function (oldIcon) {
+            var div, options;
+            div = (oldIcon && oldIcon.tagName === 'DIV' ? oldIcon : document.createElement('div'));
+            options = this.options;
+            div.innerHTML = '<svg width="35px" height="45px" viewBox="0 0 35 45" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g transform="translate(0,-4)"><path d="' + pin + '" fill="' + options.markerColor + '"></path></g></svg>';
             this._setIconStyles(div, 'icon');
             this._setIconStyles(div, 'icon-' + options.markerColor);
             return div;
@@ -72,9 +72,10 @@
         },
 
         createShadow: function () {
-            var div = document.createElement('div');
-
+            var div;
+            div = document.createElement('div');
             this._setIconStyles(div, 'shadow');
+            console.log(div);
             return div;
         }
     });
