@@ -1,6 +1,6 @@
 {
-  "name": "leaflet.knreise-markers",
-  "version": "0.0.0",
+  "name": "leaflet-knreise-markers",
+  "version": "1.0.0",
   "description": "Svg-based markers for leaflet",
   "main": "dist/leaflet.knreise-markers.js",
   "directories": {
@@ -11,7 +11,7 @@
     "url": "https://github.com/knreise/Leaflet.knreise-markers.git"
   },
   "author": "Atle Frenvik Sveen",
-  "license": "MIT",
+  "license": "BSD-3-Clause",
   "bugs": {
     "url": "https://github.com/knreise/Leaflet.knreise-markers"
   },
