@@ -19,7 +19,7 @@
 
         options: {
             iconSize: [35, 45],
-            iconAnchor:  [17, 42],
+            iconAnchor: [17, 42],
             popupAnchor: [1, -32],
             shadowAnchor: [10, 12],
             shadowSize: [36, 16],
@@ -37,7 +37,7 @@
             var div, options;
             div = (oldIcon && oldIcon.tagName === 'DIV' ? oldIcon : document.createElement('div'));
             options = this.options;
-            div.innerHTML = '<svg width="35px" height="45px" viewBox="0 0 35 45" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g transform="translate(0,-4)"><path d="' + pin + '" fill="' + options.markerColor + '"></path></g></svg>';
+            div.innerHTML = '<svg width="' + options.iconSize[0] + 'px" height="' + options.iconSize[1] + 'px" viewBox="0 0 35 45" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g transform="translate(0,-4)"><path d="' + pin + '" fill="' + options.markerColor + '"></path></g></svg>';
             this._setIconStyles(div, 'icon');
             this._setIconStyles(div, 'icon-' + options.markerColor);
             return div;

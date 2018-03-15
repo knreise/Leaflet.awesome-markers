@@ -1,6 +1,6 @@
 {
   "name": "leaflet-knreise-markers",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Svg-based markers for leaflet",
   "main": "dist/leaflet.knreise-markers.js",
   "directories": {
