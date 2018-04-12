@@ -18,17 +18,21 @@
     L.KNreiseMarkers.Icon = L.Icon.extend({
 
         options: {
-            iconSize: [35, 45],
-            iconAnchor: [17, 42],
+            size: 25,
             popupAnchor: [1, -32],
             shadowAnchor: [10, 12],
             shadowSize: [36, 16],
             className: 'awesome-marker',
             extraClasses: '',
-            markerColor: '#ff0000'
+            markerColor: '#ff0000',
+            borderWidth: '2px'
         },
 
         initialize: function (options) {
+            var size = options.size * 1.6
+            options.iconAnchor = [parseInt(0.45 * size, 10), parseInt(0.8 * size , 10)];
+            options.computedSize = size;
+            options.iconSize = [size, size];
             options = L.Util.setOptions(this, options);
             return options;
         },
@@ -37,7 +41,13 @@
             var div, options;
             div = (oldIcon && oldIcon.tagName === 'DIV' ? oldIcon : document.createElement('div'));
             options = this.options;
-            div.innerHTML = '<svg width="' + options.iconSize[0] + 'px" height="' + options.iconSize[1] + 'px" viewBox="0 0 35 45" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g transform="translate(0,-4)"><path d="' + pin + '" fill="' + options.markerColor + '"></path></g></svg>';
+
+            var borderColor = !!options.borderColor
+                ? options.borderColor
+                : options.markerColor;
+
+            var path = '<path d="' + pin + '" fill="' + options.markerColor + '" stroke="' + borderColor + '" stroke-width="' + options.borderWidth + '"></path>';
+            div.innerHTML = '<svg width="' + options.computedSize + 'px" height="' + options.computedSize + 'px" viewBox="-5 -5 45 65" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g transform="translate(0,-4)">' + path + '</g></svg>';
             this._setIconStyles(div, 'icon');
             this._setIconStyles(div, 'icon-' + options.markerColor);
             return div;
